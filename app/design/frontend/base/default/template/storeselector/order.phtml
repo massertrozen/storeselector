@@ -1,0 +1,14 @@
+<?php if ($this->isModuleEnabled()) : ?>
+<div class="col2-set order-info-box">
+    <div class="col-1">
+        <div class="box">
+            <div class="box-title">
+                <h2><?php echo $this->getModuleTitle(); ?></h2>
+            </div>
+            <div class="box-content">
+                <?php echo $this->getOrderStore() ? $this->getOrderStore() : $this->__('not selected'); ?>                
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <SkyWex_StoreSelector>
+            <version>0.0.1</version>
+        </SkyWex_StoreSelector>
+    </modules>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <customsales>
+                    <file>storeselector.xml</file>
+                </customsales>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <frontend>
+        <layout>
+            <updates>
+                <storeselector>
+                    <file>storeselector.xml</file>
+                </storeselector>
+            </updates>
+        </layout>
+
+        <events>
+            <checkout_controller_onepage_save_shipping_method>
+                <observers>
+                    <storeselector>
+                        <class>SkyWex_StoreSelector_Model_Observer</class>
+                        <method>checkout_controller_onepage_save_shipping_method</method>
+                        <type>model</type>      
+                    </storeselector>
+                </observers>
+            </checkout_controller_onepage_save_shipping_method>
+
+            <checkout_submit_all_after>
+                <observers>
+                    <storeselector>
+                        <class>SkyWex_StoreSelector_Model_Observer</class>
+                        <method>checkout_submit_all_after</method>
+                        <type>model</type>
+                    </storeselector>
+                </observers>
+            </checkout_submit_all_after>
+        </events>
+    </frontend>
+
+    <global>       
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_view_info>SkyWex_StoreSelector_Block_Sales_Order_View_Info</sales_order_view_info>
+                </rewrite>
+            </adminhtml>
+
+            <checkout>
+                <rewrite>
+                    <onepage_shipping_method_available>SkyWex_StoreSelector_Block_Checkout_Onepage_Shipping_Method_Available</onepage_shipping_method_available>
+                </rewrite>
+            </checkout>
+
+            <storeselector>
+                <class>SkyWex_StoreSelector_Block</class>
+            </storeselector>
+        </blocks>
+
+        <models>
+            <storeselector>
+                <class>SkyWex_StoreSelector_Model</class>
+                <resourceModel>storeselector_resource</resourceModel>
+            </storeselector>
+
+            <storeselector_resource>
+                <class>SkyWex_StoreSelector_Model_Resource</class>
+                <entities>
+                    <order>
+                        <table>skywex_storeselector_order</table>
+                    </order>
+                </entities>
+            </storeselector_resource>
+        </models>
+
+        <helpers>
+            <storeselector>
+                <class>SkyWex_StoreSelector_Helper</class>
+            </storeselector>
+        </helpers>
+
+        <resources>
+            <storeselector_setup>
+                <setup>
+                    <module>SkyWex_StoreSelector</module>
+                </setup>
+            </storeselector_setup>
+        </resources>
+    </global>
+    
+    <default>
+        <carriers>
+            <storeselector>
+                <enabled>1</enabled>
+                <title>Store Selector</title>
+                <sort_order>1</sort_order>
+                <sallowspecific>0</sallowspecific>
+            </storeselector>
+        </carriers>
+    </default>
+</config>
